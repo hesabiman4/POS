@@ -1,0 +1,39 @@
+```
+# Flutter/Dart
+.dart_tool/
+.build/
+.packages
+.flutter-plugins
+.flutter-plugin-dependencies
+.ios/
+.android/
+linux/flutter/ephemeral
+windows/flutter/ephemeral
+macos/flutter/ephemeral
+
+# Generated plugin build files
+*.g.dart
+
+# Coverage
+coverage/
+
+# Temporary files
+*.tmp
+*.temp
+*.log
+
+# Environment variables
+.env
+.env.*
+!.env.example
+
+# IDE specific
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS generated
+.DS_Store
+Thumbs.db
+```
