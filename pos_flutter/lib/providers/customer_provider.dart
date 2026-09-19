@@ -4,14 +4,14 @@ import '../models/customer.dart';
 import 'database_provider.dart';
 
 class CustomerProvider extends ChangeNotifier {
-  final DatabaseProvider _dbProvider;
+  final DatabaseProvider dbProvider;
   
   List<Customer> _customers = [];
   bool _isLoading = false;
   String? _error;
   String _searchQuery = '';
 
-  CustomerProvider(this._dbProvider);
+  CustomerProvider(this.dbProvider);
 
   List<Customer> get customers => _filteredCustomers;
   bool get isLoading => _isLoading;

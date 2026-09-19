@@ -4,12 +4,10 @@ import 'package:uuid/uuid.dart';
 import '../models/sale.dart';
 import '../models/cart_item.dart';
 import 'database_provider.dart';
-import 'cart_provider.dart';
-import 'customer_provider.dart';
 
 class SaleProvider extends ChangeNotifier {
   final Uuid _uuid = const Uuid();
-  final DatabaseProvider _dbProvider;
+  final DatabaseProvider dbProvider;
   
   List<Sale> _sales = [];
   bool _isLoading = false;
@@ -17,7 +15,7 @@ class SaleProvider extends ChangeNotifier {
   DateTime? _startDate;
   DateTime? _endDate;
 
-  SaleProvider(this._dbProvider);
+  SaleProvider(this.dbProvider);
 
   List<Sale> get sales => _filteredSales;
   bool get isLoading => _isLoading;
@@ -76,12 +74,12 @@ class SaleProvider extends ChangeNotifier {
     notifyListeners();
 
     try {
-      final subtotal = items.fold(0, (sum, item) => sum + item.subtotal);
-      final totalDiscount = discount ?? 0;
+      final subtotal = items.fold(0.0, (sum, item) => sum + item.subtotal);
+      final totalDiscount = discount ?? 0.0;
       final total = subtotal - totalDiscount;
       
-      double changeDue = 0;
-      double creditAmount = 0;
+      double changeDue = 0.0;
+      double creditAmount = 0.0;
 
       if (paymentType == 'credit') {
         creditAmount = total;
@@ -89,7 +87,7 @@ class SaleProvider extends ChangeNotifier {
         changeDue = amountReceived - total;
         if (changeDue < 0) {
           creditAmount = -changeDue;
-          changeDue = 0;
+          changeDue = 0.0;
         }
       }
 
@@ -103,10 +101,10 @@ class SaleProvider extends ChangeNotifier {
           id: _uuid.v4(),
           productId: item.product.id,
           productName: item.product.name,
-          quantity: item.quantity,
+          quantity: item.quantity.toDouble(),
           unitPrice: item.unitPrice,
           costPrice: item.product.costPerItem,
-          discount: item.discount ?? 0,
+          discount: item.discount ?? 0.0,
           total: item.total,
         )).toList(),
         subtotal: subtotal,
@@ -129,7 +127,7 @@ class SaleProvider extends ChangeNotifier {
       
       // Update stock (in real app, call database)
       for (final item in items) {
-        await _dbProvider.updateStock(item.product.id, -item.quantity);
+        await dbProvider.updateStock(item.product.id, -item.quantity);
       }
 
       // Update customer balance if credit

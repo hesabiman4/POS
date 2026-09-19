@@ -4,8 +4,6 @@ import 'package:flutter/foundation.dart';
 
 import '../models/user.dart';
 import '../models/product.dart';
-import '../models/customer.dart';
-import '../models/sale.dart';
 import '../utils/constants.dart';
 
 class DatabaseProvider extends ChangeNotifier {

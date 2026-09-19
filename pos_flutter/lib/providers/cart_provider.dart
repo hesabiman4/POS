@@ -3,7 +3,6 @@ import 'package:uuid/uuid.dart';
 
 import '../models/product.dart';
 import '../models/cart_item.dart';
-import 'database_provider.dart';
 
 class CartProvider extends ChangeNotifier {
   final Uuid _uuid = const Uuid();

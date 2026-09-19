@@ -3,35 +3,29 @@
 .dart_tool/
 .build/
 .packages
-.flutter-plugins
-.flutter-plugin-dependencies
-.ios/
-.android/
-linux/flutter/ephemeral
-windows/flutter/ephemeral
-macos/flutter/ephemeral
+flutter_export_environment.sh
+**/ios/.generated/
+**/android/.generated/
 
-# Generated plugin build files
-*.g.dart
+# Dependencies
+.pub-cache/
+pubspec.lock
 
-# Coverage
-coverage/
-
-# Temporary files
-*.tmp
-*.temp
-*.log
-
-# Environment variables
-.env
-.env.*
-!.env.example
-
-# IDE specific
-.vscode/
+# IDE
 .idea/
-*.swp
-*.swo
+.vscode/
+*.iml
+*.ipr
+*.iws
+
+# Environment
+.env
+.env.local
+*.env.*
+
+# Logs
+*.log
+**/logs
 
 # OS generated
 .DS_Store
