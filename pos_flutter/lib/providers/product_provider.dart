@@ -5,7 +5,7 @@ import '../models/customer.dart';
 import 'database_provider.dart';
 
 class ProductProvider extends ChangeNotifier {
-  final DatabaseProvider _dbProvider;
+  final DatabaseProvider dbProvider;
   
   List<Product> _products = [];
   List<Category> _categories = [];
@@ -16,7 +16,7 @@ class ProductProvider extends ChangeNotifier {
   String? _selectedBusinessType;
   bool _showOnlyVisible = true;
 
-  ProductProvider(this._dbProvider);
+  ProductProvider(this.dbProvider);
 
   List<Product> get products => _filteredProducts;
   List<Category> get categories => _categories;
@@ -61,7 +61,7 @@ class ProductProvider extends ChangeNotifier {
     notifyListeners();
 
     try {
-      _products = await _dbProvider.getAllProducts();
+      _products = await dbProvider.getAllProducts();
       _error = null;
     } catch (e) {
       _error = e.toString();
@@ -83,7 +83,7 @@ class ProductProvider extends ChangeNotifier {
     notifyListeners();
 
     try {
-      await _dbProvider.insertProduct(product);
+      await dbProvider.insertProduct(product);
       await loadProducts();
       _error = null;
       _isLoading = false;
@@ -102,7 +102,7 @@ class ProductProvider extends ChangeNotifier {
     notifyListeners();
 
     try {
-      await _dbProvider.updateProduct(product);
+      await dbProvider.updateProduct(product);
       await loadProducts();
       _error = null;
       _isLoading = false;
@@ -121,7 +121,7 @@ class ProductProvider extends ChangeNotifier {
     notifyListeners();
 
     try {
-      await _dbProvider.deleteProduct(productId);
+      await dbProvider.deleteProduct(productId);
       await loadProducts();
       _error = null;
       _isLoading = false;

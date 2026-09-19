@@ -1,10 +1,11 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:provider/provider.dart';
 
-import 'package:hesabiman_pos/main.dart';
 import 'package:hesabiman_pos/providers/auth_provider.dart';
 import 'package:hesabiman_pos/providers/theme_provider.dart';
 import 'package:hesabiman_pos/providers/database_provider.dart';
+import 'package:hesabiman_pos/utils/constants.dart';
 
 void main() {
   group('AuthProvider Tests', () {
@@ -50,7 +51,7 @@ void main() {
 
   group('App Constants', () {
     test('App name is set', () {
-      expect('حسابیمان POS', isNotEmpty);
+      expect(AppConstants.appName, isNotEmpty);
     });
   });
 }
